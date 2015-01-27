@@ -21,8 +21,9 @@ func Compile(c *s.C) s.Job {
 			buff := new(bytes.Buffer)
 			content := file.Content
 
+			wg.Add(1)
+			
 			go func(file s.File) {
-				wg.Add(1)
 				defer wg.Done()
 				n, err := gcss.Compile(buff, content)
 				if err != nil {
